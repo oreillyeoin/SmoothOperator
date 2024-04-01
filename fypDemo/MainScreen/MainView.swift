@@ -120,16 +120,18 @@ struct MainView: View {
                             viewModel.endTrip()
                             summary = true
                         }) {
-                            Text("END TRIP")
-                                .font(.title2)
-                                .bold()
-                                .foregroundColor(.yellow)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(.black)
+                                    .cornerRadius(30)
+                                Text("END TRIP")
+                                    .font(.title2)
+                                    .bold()
+                                    .foregroundColor(.yellow)
+                            }
                         }
                         .frame(width: 300, height: 50)
                         .padding(.horizontal)
-                        .background(.black)
-                        .cornerRadius(25)
-                        
                     }
                     else {
                         ScrollView(showsIndicators: false) {
@@ -216,18 +218,19 @@ struct MainView: View {
                                 .foregroundColor(Color.clear)
                                 .padding(.horizontal)
                             
-                            NavigationLink {
-                                ContentView().navigationBarBackButtonHidden(true)
-                            } label: {
-                                Text("DONE")
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(.yellow)
+                            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundColor(.black)
+                                        .cornerRadius(30)
+                                    Text("DONE")
+                                        .font(.title2)
+                                        .bold()
+                                        .foregroundColor(.yellow)
+                                }
                             }
                             .frame(width: 300, height: 50)
                             .padding(.horizontal)
-                            .background(.black)
-                            .cornerRadius(25)
                             
                             NavigationLink(destination: History().navigationBarBackButtonHidden(true)) {
                                 ZStack{
@@ -242,8 +245,6 @@ struct MainView: View {
                             }
                             .frame(width: 300, height: 50)
                             .padding(.horizontal)
-                            .background(.black)
-                            .cornerRadius(25)
                         }
                     }
             }

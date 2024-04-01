@@ -86,7 +86,7 @@ extension MainView{
                     }
                     
                     //detecting acceleration
-                    else if self.acceleration > 1 || self.acceleration < -1.5{
+                    else if self.acceleration > 1.5 || self.acceleration < -2{
                         self.accCount += 1
                         
                         if self.accCount % 3 == 1{

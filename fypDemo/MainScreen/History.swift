@@ -135,17 +135,17 @@ struct History: View {
                         Text("No journeys available")
                     }
                     
-                    NavigationLink {
-                        ContentView().navigationBarBackButtonHidden(true)
-                    } label: {
-                        Text("DONE")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.yellow)
+                    NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(.black)
+                            Text("DONE")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.yellow)
+                        }
                     }
                     .frame(width: 300, height: 50)
-                    .background(.black)
-                    .cornerRadius(30)
                     .padding()
                 }
                 .padding(.horizontal, 10)
