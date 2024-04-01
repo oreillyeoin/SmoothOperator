@@ -46,7 +46,6 @@ struct History: View {
                         }
                     }
                     
-                    // Your UI components to display journeys
                     if !viewModel.journeys.isEmpty {
                         ForEach(viewModel.journeys.indices, id: \.self) { index in
                             let journey = viewModel.journeys[index]
@@ -61,7 +60,7 @@ struct History: View {
                                     .italic()
                                 
                                 Divider()
-                                    .background(Color.black) // Set the color of the divider
+                                    .background(Color.black)
                                     .frame(width: 250)
                                     .padding(.maximum(5, 5))
 
@@ -101,7 +100,7 @@ struct History: View {
                             }
                             .frame(maxWidth: 300)
                             .padding()
-                            .background(Color.white) // Optionally, you can set the background color here
+                            .background(Color.white)
                             .cornerRadius(25)
                             .shadow(radius: 5)
                             .overlay(
@@ -113,7 +112,7 @@ struct History: View {
                                         }) {
                                             Image(systemName: "trash")
                                                 .foregroundColor(.red)
-                                                .padding(5) // For easier tapping
+                                                .padding(5)
                                         }
                                         .buttonStyle(PlainButtonStyle())
                                         .padding(.top, 10)
@@ -165,7 +164,7 @@ struct History: View {
                     }
                 },
                 secondaryButton: .cancel {
-                    journeyToDelete = nil // Reset if cancelled
+                    journeyToDelete = nil
                 }
             )
         }
