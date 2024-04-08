@@ -127,8 +127,6 @@ struct History: View {
                                     dropdown = (dropdown == index) ? nil : index
                                 }
                             }
-                            
-                            
                         }
                     } else {
                         Text("No journeys available")
@@ -148,9 +146,7 @@ struct History: View {
                     .padding()
                 }
                 .padding(.horizontal, 10)
-                
             }
-            
         }
         .alert(isPresented: $confirmDelete) {
             Alert(

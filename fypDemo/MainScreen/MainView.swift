@@ -54,12 +54,9 @@ struct MainView: View {
                                 )
                                 .foregroundColor(Color.black)
                             
-                            
                             Text("Initialising...")
                                 .foregroundColor(Color.black)
                                 .frame(alignment: .center)
-                            
-                            
                         }
                     
                         HStack(spacing: 20) {
@@ -158,11 +155,6 @@ struct MainView: View {
                                     .foregroundColor(Color.black)
                                 
                                 Rectangle()
-                                    .frame(height: 0)
-                                    .foregroundColor(Color.clear)
-                                    .padding(.horizontal)
-                                
-                                Rectangle()
                                     .frame(height: 10)
                                     .foregroundColor(Color.clear)
                                     .padding(.horizontal)
@@ -177,7 +169,6 @@ struct MainView: View {
                                         .bold()
                                         .frame(alignment: .trailing)
                                 }
-                                
                                 
                                 HStack{
                                     Text("Penalties: ")

@@ -12,7 +12,6 @@ struct ProfileView: View {
     @State private var showingSignOutAlert = false
     
     var body: some View {
-
         if let user = viewModel.currentUser{
             List{
                 Section{
@@ -35,7 +34,6 @@ struct ProfileView: View {
                                 .font(.footnote)
                                 .accentColor(.gray)
                         }
-                        
                     }
                 }
                 
@@ -53,12 +51,11 @@ struct ProfileView: View {
                     title: Text("Sign Out"),
                     message: Text("Are you sure you want to sign out?"),
                     primaryButton: .destructive(Text("Sign Out")) {
-                        viewModel.signOut() // Proceed with sign out
+                        viewModel.signOut()
                     },
-                    secondaryButton: .cancel() // Dismiss the alert without action
+                    secondaryButton: .cancel()
                 )
             }
-        
         }
     }
 }

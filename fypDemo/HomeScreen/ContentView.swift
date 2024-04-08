@@ -44,7 +44,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 50)
-                        .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                         
                         NavigationLink(destination: CreateAccount()) {
@@ -58,7 +58,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 50)
-                        .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                         
                         
@@ -74,7 +74,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 50)
-                        .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal)
 
                         
@@ -89,7 +89,7 @@ struct ContentView: View {
                             }
                         }
                         .frame(height: 50)
-                        .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                     }
                 }

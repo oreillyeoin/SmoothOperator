@@ -5,7 +5,6 @@
 //  Created by Eoin O’Reilly on 29/10/2023.
 //
 
-//import CoreMotion
 import CoreLocation
 import Foundation
 import Firebase
@@ -38,13 +37,13 @@ extension MainView{
         var accCount = 0
         var speedCount = 0
 
-        
         struct Journey {
             var score: Double
             var distance: Double
             var penalty: Int
             var date: Date
         }
+        
         
         let locationManager = CLLocationManager()
         
@@ -64,6 +63,7 @@ extension MainView{
                     locationManager.stopUpdatingLocation()
                 }
                 
+                // set previous speed (for acceleration calculation) and update speed
                 self.prevSpeed = activeSpeed
                 self.activeSpeed = currentLocation.speed
                 
@@ -71,12 +71,11 @@ extension MainView{
                 if self.activeSpeed != -1{
                     self.initialised = true
                     
+                    // update distance and acceleration
                     let now = Date()
                     self.activeDistance += currentLocation.distance(from: prevLocation ?? currentLocation)
                     self.acceleration = (activeSpeed - prevSpeed) / now.timeIntervalSince((lastTime ?? now) as Date)
                                         
-
-
                     // ALGORITHM
                     self.penWarning = false
                     
@@ -85,10 +84,11 @@ extension MainView{
                         self.acceleration = 0
                     }
                     
-                    //detecting acceleration
+                    // detecting hard acceleration / braking
                     else if self.acceleration > 1.5 || self.acceleration < -2{
                         self.accCount += 1
                         
+                        // every three updates apply an additional penalty
                         if self.accCount % 3 == 1{
                             if self.acceleration > 0{
                                 applyPenalty(message: "Harsh Acceleration")
@@ -106,6 +106,7 @@ extension MainView{
                     if self.activeSpeed*3.6 > 130{
                         self.speedCount += 1
                         
+                        // every six updates apply an additional penalty
                         if self.speedCount % 6 == 1{
                             applyPenalty(message: "High Speed")
                         }
@@ -146,7 +147,6 @@ extension MainView{
             let newJourney = Journey(score: fscore, distance: fdistance, penalty: fpenalty, date: Date())
 
             addJourney(newJourney: newJourney)
-            
         }
         
         func addJourney(newJourney: Journey) {
@@ -158,7 +158,6 @@ extension MainView{
                     if let document = document, document.exists {
                         var journeys = [Journey]()
                         if let journeysData = document.data()?["journeys"] as? [[String: Any]] {
-                            // Convert array of dictionaries to array of structs
                             for journeyData in journeysData {
                                 if let fscore = journeyData["score"] as? Double, let fDistance = journeyData["distance"] as? Double, let fpenalty = journeyData["penalty"] as? Int, let timestamp = journeyData["date"] as? Timestamp  {
                                     
@@ -173,7 +172,6 @@ extension MainView{
                         
                         let averageScore = journeys.reduce(0.0, { $0 + $1.score }) / Double(journeys.count)
                         
-                        // Convert array of structs to array of dictionaries
                         let updatedJourneysData = journeys.map { journey -> [String: Any] in
                             return [
                                 "score": journey.score,

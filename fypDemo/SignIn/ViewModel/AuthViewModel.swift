@@ -54,7 +54,6 @@ class AuthViewModel: ObservableObject{
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
             
-            
         } catch{
             showError = true
             if error.localizedDescription == "The email address is badly formatted."{
@@ -74,10 +73,6 @@ class AuthViewModel: ObservableObject{
         } catch{
             print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
-    }
-    
-    func deleteAccount(){
-        
     }
     
     func fetchUser() async {

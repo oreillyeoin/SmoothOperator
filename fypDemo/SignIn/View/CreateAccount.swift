@@ -14,7 +14,6 @@ struct CreateAccount: View {
     @State var email: String = ""
     @EnvironmentObject var viewModel: AuthViewModel
     
-// field validation! look at bottom
     
     var body: some View {
         ZStack{
@@ -54,11 +53,11 @@ struct CreateAccount: View {
                 
                 SecureField("Password",
                           text: $password,
-                          prompt: Text("Password").foregroundColor(.black)) // How to change the color of the TextField Placeholder
+                          prompt: Text("Password").foregroundColor(.black))
                 .padding(10)
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black, lineWidth: 2) // How to add rounded corner to a TextField and change it colour
+                        .stroke(.black, lineWidth: 2)
                 }
                 .padding(.horizontal)
                 .autocapitalization(. none)
@@ -66,11 +65,11 @@ struct CreateAccount: View {
                 ZStack(alignment: .trailing){
                     SecureField("Repeat Password",
                               text: $confirmPassword,
-                              prompt: Text("Repeat Password").foregroundColor(.black)) // How to change the color of the TextField Placeholder
+                              prompt: Text("Repeat Password").foregroundColor(.black))
                     .padding(10)
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(.black, lineWidth: 2) // How to add rounded corner to a TextField and change it colour
+                            .stroke(.black, lineWidth: 2)
                     }
                     .padding(.horizontal)
                     .autocapitalization(. none)
@@ -92,7 +91,6 @@ struct CreateAccount: View {
                     }
                 }
                 
-                
                 Button {
                     Task{
                         try await viewModel.createUser(withEmail: email,
@@ -106,7 +104,7 @@ struct CreateAccount: View {
                         .foregroundColor(.yellow)
                 }
                 .frame(height: 50)
-                .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
+                .frame(maxWidth: .infinity)
                 .background(.black)
                 .cornerRadius(20)
                 .padding()
@@ -134,12 +132,3 @@ extension CreateAccount: AuthenticationFormProtocol{
 #Preview {
     CreateAccount()
 }
-
-
-//    @Published var hasEightChar = false
-//    @Published var hasSpacialChar = false
-//    @Published var hasOneDigit = false
-//    @Published var hasOneUpperCaseChar = false
-//    @Published var confirmationMatch = false
-//    @Published var areAllFieldsValid = false
-//     validate no bad characters like ' '

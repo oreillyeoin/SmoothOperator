@@ -6,12 +6,14 @@ extension History {
     @MainActor class ViewModel: ObservableObject {
         @Published var journeys: [Journey] = []
         @Published var avgScore = -1.0
+        
         struct Journey {
             var score: Double
             var distance: Double
             var penalty: Int
             var date: Date
         }
+        
         
         func fetchJourneys() {
             guard let userID = Auth.auth().currentUser?.uid else {
@@ -65,11 +67,10 @@ extension History {
                     let db = Firestore.firestore()
                     let userRef = db.collection("users").document(userID)
 
-                    // Assuming `journeys` is already fetched and contains the journey to be deleted
+                    // Assuming journeys is already fetched
                     var updatedJourneys = journeys
                     updatedJourneys.remove(at: index)
 
-                    // Convert updatedJourneys to a format suitable for Firestore
                     let journeysData = updatedJourneys.map { journey -> [String: Any] in
                         return [
                             "score": journey.score,
@@ -84,12 +85,11 @@ extension History {
                     // Update Firestore
                     userRef.updateData([
                             "journeys": journeysData,
-                            "averageScore": newAvgScore // Update the averageScore in Firestore as well
+                            "averageScore": newAvgScore
                     ]) { error in
                         if let error = error {
                             print("Error updating document: \(error.localizedDescription)")
                         } else {
-                            // Update the local array and average score to reflect the deletion and new average
                             DispatchQueue.main.async {
                                 self.journeys = updatedJourneys
                                 self.avgScore = newAvgScore

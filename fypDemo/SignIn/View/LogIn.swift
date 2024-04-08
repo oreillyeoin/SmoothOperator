@@ -36,24 +36,24 @@ struct LogIn: View {
                 
                 HStack {
                     Group {
-                        if showPassword { // when this changes, you show either TextField or SecureField
+                        if showPassword {
                             TextField("Password",
                                       text: $password,
                                       prompt: Text("Password").foregroundColor(.black)) .autocapitalization(. none)
                                            
                         } else {
-                            SecureField("Password", // how to create a secure text field
+                            SecureField("Password",
                                         text: $password,
-                                        prompt: Text("Password").foregroundColor(.black)) // How to change the color of the TextField Placeholder
+                                        prompt: Text("Password").foregroundColor(.black))
                         }
                     }
                     .padding(10)
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(.black, lineWidth: 2) // How to add rounded corner to a TextField and change it colour
+                            .stroke(.black, lineWidth: 2)
                     }
                     
-                    Button { // add this new button
+                    Button {
                         showPassword.toggle()
                     } label: {
                         Image(systemName: showPassword ? "eye.slash" : "eye")
@@ -63,9 +63,7 @@ struct LogIn: View {
                 }.padding(.horizontal)
                 
                 Spacer()
-                
-                // sign-in button
-                
+                                
                 Button {
                     Task{
                         try await viewModel.signIn(withEmail: email, password: password)
@@ -78,23 +76,18 @@ struct LogIn: View {
                         .foregroundColor(.white)
                 }
                 .frame(height: 50)
-                .frame(maxWidth: .infinity) // how to make a button fill all the space available horizontaly
-//                .background(
-//                    isSignInButtonDisabled ? Color(.gray) : Color(.black)
-//                )
+                .frame(maxWidth: .infinity)
                 .background(Color(.black))
                 .cornerRadius(20)
                 .disabled(!formIsValid) 
                 .opacity(formIsValid ? 1.0 : 0.5)
                 .padding()
-                
             }
         }
         .alert(isPresented: $viewModel.showError, content: {
             Alert(title: Text(viewModel.errorMessage))
         })
     }
-        
 }
 
 extension LogIn: AuthenticationFormProtocol{
@@ -105,7 +98,6 @@ extension LogIn: AuthenticationFormProtocol{
         && password.count > 5
     }
 }
-
 
 #Preview {
     LogIn()
