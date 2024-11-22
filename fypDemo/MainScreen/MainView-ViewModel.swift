@@ -34,6 +34,7 @@ extension MainView{
         var lastTime: Date?
         var stop = false
         var updateCount = 0
+        var acc = 0.0
         var accCount = 0
         var speedCount = 0
 
@@ -79,18 +80,23 @@ extension MainView{
                     // ALGORITHM
                     self.penWarning = false
                     
+                    // **********************
+                    acc = self.acceleration + (self.activeSpeed/10 > 3 ? self.activeSpeed : 3)
+                    
                     // detect invalid acceleration values
-                    if self.acceleration > 10 || self.acceleration < -10{
-                        self.acceleration = 0
+                    if acc > 10 || acc < -10{
+                        acc = 0
                     }
                     
+                    //else if self.acceleration > 1.5 || self.acceleration < -2{
+                    
                     // detecting hard acceleration / braking
-                    else if self.acceleration > 1.5 || self.acceleration < -2{
+                    else if acc > 2.5 || acc < -4 {
                         self.accCount += 1
                         
                         // every three updates apply an additional penalty
                         if self.accCount % 3 == 1{
-                            if self.acceleration > 0{
+                            if acc > 0{
                                 applyPenalty(message: "Harsh Acceleration")
                             }
                             else{
@@ -102,7 +108,8 @@ extension MainView{
                         self.accCount = 0
                     }
                     
-                    // detecting high speed
+                    
+                    // detecting high speed. 3.6 is to convert m/s to km/h
                     if self.activeSpeed*3.6 > 130{
                         self.speedCount += 1
                         
