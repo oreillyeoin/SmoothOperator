@@ -81,17 +81,26 @@ extension MainView{
                     self.penWarning = false
                     
                     // **********************
-                    acc = self.acceleration + (self.activeSpeed/10 < 3 ? self.activeSpeed : 3)
+                    if self.acceleration > 0{
+                        acc = self.acceleration + (self.activeSpeed/10 < 3 ? self.activeSpeed/10 : 3)
+                    }
+                    else{
+                        acc = self.acceleration - (self.activeSpeed/10 < 3 ? self.activeSpeed/10 : 3)
+                    }
+                    
+                    //print(self.activeSpeed)
+                    //print(self.acceleration)
+                    print(acc)
                     
                     // detect invalid acceleration values
-                    if acc > 10 || acc < -10{
+                    if acc > 6 || acc < -6{
                         acc = 0
                     }
                     
                     //else if self.acceleration > 1.5 || self.acceleration < -2{
                     
                     // detecting hard acceleration / braking
-                    else if acc > 2.5 || acc < -4 {
+                    else if acc > 3 || acc < -3 {
                         self.accCount += 1
                         
                         // every three updates apply an additional penalty
