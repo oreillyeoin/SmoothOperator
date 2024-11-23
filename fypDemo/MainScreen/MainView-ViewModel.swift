@@ -88,10 +88,6 @@ extension MainView{
                         acc = self.acceleration - (self.activeSpeed/10 < 3 ? self.activeSpeed/10 : 3)
                     }
                     
-                    //print(self.activeSpeed)
-                    //print(self.acceleration)
-                    print(acc)
-                    
                     // detect invalid acceleration values
                     if acc > 6 || acc < -6{
                         acc = 0
