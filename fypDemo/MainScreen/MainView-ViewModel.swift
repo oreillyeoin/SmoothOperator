@@ -96,7 +96,7 @@ extension MainView{
                     //else if self.acceleration > 1.5 || self.acceleration < -2{
                     
                     // detecting hard acceleration / braking
-                    else if acc > 3 || acc < -3 {
+                    else if acc > 3 || acc < -4 {
                         self.accCount += 1
                         
                         // every three updates apply an additional penalty
