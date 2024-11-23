@@ -81,7 +81,7 @@ extension MainView{
                     self.penWarning = false
                     
                     // **********************
-                    acc = self.acceleration + (self.activeSpeed/10 > 3 ? self.activeSpeed : 3)
+                    acc = self.acceleration + (self.activeSpeed/10 < 3 ? self.activeSpeed : 3)
                     
                     // detect invalid acceleration values
                     if acc > 10 || acc < -10{
